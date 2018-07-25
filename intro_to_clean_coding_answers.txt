@@ -1,10 +1,10 @@
-1. In your own words, explain what clean code is and why it is important.
+﻿1. In your own words, explain what clean code is and why it is important.
 
 Answer: Clean code is code that is easy to understand and easy to change.  Not only should it be understandable by the original author, but also others.  This way he or she can easily fix bugs or make changes without breaking any existing functions.  The importance of writing clean code is to help with efficiency.  Code isn't always just written once and forgotten.  Most of the time people continue working on the same code and having a clean legible code helps with quickly making changes instead of taking hours trying to decipher what the original author was trying to achieve.
 
 2. Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
 
-
+Credit/Debit card readers rely on computers to ensure that the right amount is charged and deducted from the bank account.  If the reader begins charging random amounts and becomes faulty this could lead to many issues with the bank and how much a person may even have in his/her bank account.
 
 3. Would you consider the following to be clean code? Explain why or why not.
 If not, refactor the code.
@@ -104,7 +104,7 @@ CLASS BankServices
      END
  END FUNCTION
 
- END CLASS
+END CLASS
 
  ....
  ....
@@ -146,15 +146,15 @@ least twice in the array, and false if every element is distinct.
 Answer:
 
 function checkDuplicates(integers) {
+  let areDuplicates = false;
   for (let i = 0; i < integers.length; i++) {
-    for (let j = 0, j < integers.length; j++) {
-      if (integers[i] === intergers[j]) {
-        return true;
-      } else {
-        return false;
+    for (let j = i + 1; j < integers.length; j++) {
+      if (integers[i] === integers[j]) {
+        areDuplicates = true;
       }
     }
   }
+  return areDuplicates;
 }
 
 Extra Credit
@@ -165,6 +165,8 @@ that the strings contain only lowercase letters and do not worry about
 case-sensitivity. Hint: Your first task will be to convert the strings to arrays.
 
 function isAnagram(stringOne, stringTwo) {
-  let stringArray = [];
-    stringArray.push(str.split(stringOne))
-}
+  function alphabetize(string) {
+    return string.replace(/\s+/g,'').split('').sort().join('');
+  }
+  return (alphabetize(stringOne) === alphabetize(stringTwo)) 
+  }
