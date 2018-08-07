@@ -12,27 +12,33 @@ ANSWER: I would use stacks for UNDO because when you undo something you want to 
 Programming Questions
 You may program the following question in any language of your choice. Before you begin coding, write out a plan as to how you will solve the question.
 
-4.Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+1.Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
 ANSWER:
-FUNCTION reverse(string)
-  INIT split String to array named reversedLetters
-  INIT empty Array reversedWord
-  FOR each character in reversedLetters starting from end of Array
-    PUSH character to reversedWord
+FUNCTION reverse(word)
+  INIT empty Array letters //this is our stack
+  INIT empty String reverseWord
+  FOR each character in word
+    PUSH character to letters //letters placed into stack
   END FOR
-  RETURN reversedWord.join
+  FOR each character in word
+    POP characters from letters into reverseWord //popoff stack in reverse order
 END FUNCTION
 
-function reverse(string) {
-  let reversedLetters = string.split("");
-  let reversedWord = [];
-  for (let i = reversedLetters.length - 1; i >= 0; i--) {
-    reversedWord.push(reversedLetters[i])
+function reverse(word) {
+  let stack = [];
+  let reverseWord = "";
+  for (let i = 0; i < word.length; i++) {
+    stack.push(word[i]);
   }
- return reversedWord.join("")
+  for (let i = 0; i < word.length; i++) {
+    reverseWord += stack.pop();
+  }
+  return reverseWord;
 }
 
-5. Implement the delete functionality of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure.
+console.log(reverse("Hello!"))
+
+2. Implement the delete functionality of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure.
 
 To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, except for the last one which should be deleted and returned.
 
@@ -50,7 +56,7 @@ CLASS Stack
 END CLASS
 
 
-6. Fill in the methods for the following Queue class so that it will work as expected (FIFO).
+3. Fill in the methods for the following Queue class so that it will work as expected (FIFO).
 
 CLASS QUEUE
  FUNCTION enqueue(element)
