@@ -21,48 +21,202 @@ Answer: Hash tables and objects are similar.  The difference is that objects sho
 
 6.Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 Answer:
-function createCustomerInfo(name, address, phoneNumber){
-  CREATE HashMapName
-  CREATE HashMapAddress
-  CREATE HashMapPhoneNumber
-  STORE phoneNumber (key) with name and address (values)
+function hash(key, size) {
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash += key.charCodeAt(i);
+  }
+  return hash % size;
 }
 
-function lookupCustomer(phoneNumber) {
-  IF customer does NOT have phoneNumber
-    PRINT "New customer needs to be created"
-  ELSE IF customer has phoneNumber
-    RETURN customer information
-  ELSE customer phoneNumber doesn't match
-    PRINT "Customer info does not exist"
-  END IF
+function hashTable() {
+  let storage = [];
+  const storageLimit = 500;
+
+  this.add = function(phoneNumber, name, address) {
+    let index = hash(phoneNumber, storageLimit);
+    if(storage[index] === undefined) {
+      storage[index] = [
+        [phoneNumber, name, address]
+      ];
+    } else {
+      let inserted = false;
+      for (let i = 0; i < storage[index].length; i++) {
+       if (storage[index][i][0] === phoneNumber) {
+           storage[index][i][1] = name;
+           storage[index[i][2]] = address;
+           inserted = true;
+         }
+       }
+       if (inserted === false) {
+         storage[index].push([phoneNumber, name, address])
+       }
+    }
+  };
+
+ this.lookup =  function(phoneNumber) {
+   let index = hash(phoneNumber, storageLimit);
+   if(storage[index] === undefined) {
+     return "Customer has not been created";
+   } else {
+     for (let i = 0; i < storage[index].length; i++) {
+       if (storage[index][i][0] === phoneNumber) {
+         return storage[index][i][0] + ", " + storage[index][i][1] + ", " + storage[index][i][2];
+       } else {
+         return "Customer does not exist"
+       }
+     }
+   }
+ };
 }
+
+
+let customers = new hashTable();
+customers.add("111-111-1111", "John", "98 Square St");
+customers.add("222-222-2222", "Sam", "765 Triagle Drive");
+customers.add("333-333-3333", "Jim", "432 Trapezoid Blvd");
+customers.add("444-444-4444", "Tod", "10 Circle Ct");
+
+console.log(customers.lookup("333-333-3333"));
+console.log(customers.lookup("444-444-4444"));
+console.log(customers.lookup("555-055-5555"));
+
 
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
 Answer:
-function createInventory(itemName, itemId, quanitity) {
-  CREATE HashMapInventory
-  STORE itemId (key) in HashMapInventory with itemName and quantity (values)
+function hash(key, size) {
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash += key.charCodeAt(i);
+  }
+  return hash % size;
 }
 
-function checkInventory(itemId) {
-  IF itemId is in HashMapInventory
-    RETURN itemName and quanitity
-  ELSE
-    PRINT "This item does not exist"
-  END IF
-}
+function hashTable() {
+  let storage = [];
+  const storageLimit = 500;
+
+  this.add = function(itemId, itemName, quantity) {
+    let index = hash(itemId, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [[itemId, itemName, quantity]];
+    } else {
+      let inserted = false;
+      for (let i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === itemId) {
+          storage[index][i][1] = itemName;
+          storage[index][i][2] = quantity;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([itemId, itemName, quantity]);
+      }
+    }
+  };
+
+  this.lookup = function(itemId) {
+    let index = hash(itemId, storageLimit);
+    if (storage[index] === undefined) {
+      return "Inventory list is empty"
+    } else {
+      for (i = 0 ; i < storage[index].length; i++) {
+        if(storage[index][i][0] === itemId) {
+          return "Item#: " + storage[index][i][0] + ", " + storage[index][i][1] + ", Qty:" + storage[index][i][2];
+        } else {
+          return "Item not found"
+        }
+      }
+    }
+  }
+};
+
+let inventory = new hashTable();
+inventory.add("123", "Table", "20");
+inventory.add("456", "Couch", "10");
+inventory.add("789", "Ottoman", "5");
+
+console.log(inventory.lookup("999"));
+console.log(inventory.lookup("123"));
+console.log(inventory.lookup("456"));
+
+
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
-function createDigitalNewspaper(publisher, publicationDate) {
-  CREATE HashMapNewspaper
-  STORE publicationDate (key) with publisher (value) in HashMapNewspaper
+Answer:
+function hash(key, size) {
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash += key.charCodeAt(i);
+  }
+  return hash % size;
 }
 
-function searchNewspaper(publicationDate) {
-  IF publicationDate is in HashMapNewspaper
-    RETURN publicationDate and publisher
-  ELSE
-    PRINT publicationDate 'was not found'
-  END IF
-}
+function hashTableByPublisher() {
+  let storage = [];
+  const storageLimit = 500;
+
+  this.add = function(publisher, publicationDate) {
+    let index = hash(publisher, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [[publisher, publicationDate]];
+    }
+  };
+
+  this.lookupByPublisher = function(publisher) {
+    let index = hash(publisher, storageLimit);
+    if (storage[index] === undefined) {
+      return "Publication Date not entered"
+    } else {
+      for (i = 0 ; i < storage[index].length; i++) {
+        if(storage[index][i][0] === publisher) {
+          return "Publisher: " + storage[index][i][0] + ", Publication Date: " + storage[index][i][1];
+        } else {
+          return "Publisher not found"
+        }
+      }
+    }
+  };
+};
+
+function hashTableByDate() {
+  let storage = [];
+  const storageLimit = 500;
+
+  this.add = function(publisher, publicationDate) {
+    let index = hash(publicationDate, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [[publisher, publicationDate]];
+    }
+  };
+
+  this.lookupByDate = function(publicationDate) {
+    let index = hash(publicationDate, storageLimit);
+    if (storage[index] === undefined) {
+      return "Publisher not entered"
+    } else {
+      for (i = 0 ; i < storage[index].length; i++) {
+        if(storage[index][i][1] === publicationDate) {
+          return "Publisher: " + storage[index][i][0] + ", Publication Date: " + storage[index][i][1];
+        } else {
+          return "Date not found"
+        }
+      }
+    }
+  };
+};
+
+let newspaper = new hashTableByPublisher();
+let newspaperDates = new hashTableByDate();
+
+newspaper.add("USA Today", "2001");
+newspaper.add("New York Daily News", "2000");
+newspaper.add("NY Times", "2010");
+
+newspaperDates.add("USA Today", "2001");
+newspaperDates.add("New York Daily News", "2005");
+newspaperDates.add("NY Times", "2010");
+
+console.log(newspaper.lookupByPublisher("USA Today"));
+console.log(newspaper.lookupByPublisher("New York Daily News"));
+console.log(newspaperDates.lookupByDate("2001"));
