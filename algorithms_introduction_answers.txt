@@ -1,0 +1,65 @@
+Exercises
+Provide all code and written answers in a file named algorithms_introduction_answers.txt:
+
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+Making coffee;
+  FUNCTION makeCoffee
+    IF pot is NOT clean
+      CLEAN pot
+    END IF
+    IF no filter in basket
+      PUT filter in basket
+    END IF
+    IF coffee grounds availble < coffee grounds needed
+      ADD more coffee grounds
+    END IF
+    PUT coffee grounds in filter AND filter in basket AND basket in pot
+    TURN ON coffee machine to heat
+    WHILE coffee is not brewed
+      keep brewing coffee
+    END WHILE
+    POUR cup
+    DRINK cup
+  END FUNCTION
+
+Washing dishes;
+  FUNCTION washDishes
+    IF sink not filled up with water
+      ADD water
+    END IF
+    ADD soap to water
+    IF water has soap
+      FOR each dirty dish
+        put dish in sink and wash
+      END FOR
+    END IF
+    FOR each dish thats in sink
+      IF dish is clean
+        RINSE dish
+        DRY dish
+        PUT dish away
+      END IF
+    END FOR
+  END FUNCTION
+
+A choice of your own - making a peanut butter sandwich
+  FUNCTION 
+    IF two slices of bread is available
+      ADD peanut butter on bread1
+      ADD jelly on bread2
+    END IF
+    IF bread1 and bread2 both have spread on it
+      PRINT peanut butter jelly time!
+    END IF
+  END FUNCTION
+
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+Answers:
+-Spotify: Spotify's algorithm puts together recommended playlists based off of music you've played
+-Netflix: Netflix's algorithm produces recommended shows and movies to watch on the top of the list
+-McDonald's: McDonald's has found an algorithm to make burgers simple and quick compared to restaurants.
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+Answer:  An efficient algorithm is something that does not invest too much time to complete.  They avoid redundancy and the space used is being optimized. Inefficient algorithm is the opposite, time and space is not optimized.
