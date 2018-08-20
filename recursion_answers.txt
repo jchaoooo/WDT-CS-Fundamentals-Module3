@@ -1,0 +1,49 @@
+Exercises
+For exercises requiring code, you are free to use the language of your choice.
+
+Provide all code and written answers in a file named recursion_answers.txt:
+
+1.Define and compare recursion and iteration.
+Answer: An iterative function is one that loops to repeat some part of a code.  A recursive function is one that calls itself again to repeat the code.  Using a simple for loop to display the number from one to ten is an iterative function.  Whereas a factorial operation is an example of recursion.
+
+2.Name five algorithms that are commonly implemented by recursion.
+Answer:
+-Fibonacci sequence
+-Factorial operation
+-binary search
+-quick sort
+-merge sort
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+Answer: When an algorithm can be defined as a combination of sub-results starting with known cases, a recursive solution makes the most sense.  For example, a factorial operation.  Algorithms that requiring a pass over a collection isn't idea using recursion since loops are great at running straight through a data set.  This is where iteration is best, like when we are loop over a collection of numbers trying to find the max.
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+Answer:  For all three algorithms the similarities between the recursive and iterative solutions is that they conclude with the same results.  However, the difference is how the algorithms got to their final result.  With iteration, it runs through the data set through a loop. Whereas with recursion in each algorithm the function calls on itself until it reaches the base case.
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+Answer:
+function recursiveCount(collection) {
+  let counter = 0;
+  for (let i = 0; i < collection.length; i++) {
+    if (typeof collection[i] === "object") {
+      counter += recursiveCount(collection[i])
+    } else {
+      console.log(counter++)
+    }
+  } return counter;
+}
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+function isPalindrome(word) {
+  let wordLength = word.length
+  if (wordLength === 0 || wordLength === 1) {
+    return "Yes, it is a palindrome."
+  }
+  if (word[0] === word[wordLength - 1]) {
+    return isPalindrome(word.slice(1, wordLength-1))
+  }
+  return "Sorry, not a palindrome."
+}
+
+7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+Answer: Google is showing us how recursion works, it's solving a problem where the answer is returning "Did you mean: recursion" until the search changes to something else.
