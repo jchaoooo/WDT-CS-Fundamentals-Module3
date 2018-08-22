@@ -1,0 +1,66 @@
+Exercises
+For exercises requiring code, you are free to use the language of your choice.
+
+Create a file named algos_sorting_answers.txt and answer these questions in it:
+
+1. Write pseudocode for bubble sort.
+Answer:
+FUNCTION bubbleSort(collection)
+  REPEAT
+    SET swapped to false
+    FOR i = FIRST INDEX of collection to LAST INDEX of collection - 1
+      IF collection[i] > collection[j] THEN
+        SET temp to collection[i]
+        SET collection[i] to collection[j]
+        SET collection[j] to temp
+        SET swapped to true
+      END IF
+    END FOR
+  UNTIL swapped is false
+  RETURN collection
+END FUNCTION
+
+function swap(collection, i, j) {
+  let temp = collection[i];
+  collection[i] = collection[j];
+  collection[j] = temp
+}
+
+function bubbleSort(collection) {
+  let swapped;
+  do {
+    swapped = false;
+    for (let i = 0; i < collection.length; i++) {
+      if(collection[i] && collection[i + 1] && collection[i] > collection[i + 1]) {
+        swap(collection, i, i + 1);
+        swapped = true;
+      }
+    }
+  } while(swapped);
+  return collection;
+}
+
+
+2. Write pseudocode for quicksort.
+Answer:
+FUNCTION quickSort(collection)
+  IF collection.length < 2
+    RETURN collection
+  END IF
+  SET pivot to collection[0]
+  SET lesser
+  SET greater
+  FOR i = FIRST INDEX of collection to LAST INDEX of collection - 1
+    IF collection < pivot
+      PUSH collection[i] to lesser
+    ELSE
+      PUSH collection[i] to greater
+  END FOR
+  RETURN concat quickSort(lesser) + pivot + quickSort(greater)
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others.  Walking through each algorithm with a few sample collections may help.
+Answer: Both quicksort and mergesort are much more efficient than other is because they both break the collection down into subcollections and sorts each sub-collections which save a lot of time.  They both can quickly deal with huge list items and are both divide and conquer algorithms.  Quicksort can sort in place so minimal storage is required. Merge sort works well with large data set compared to the other algorithms.
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+Answer: Bucket sort is a sorting algorithm that works by distributing the elements of a collection into a number of buckets.  Each bucket is individually sorted, wither by using a different sorting algorithm or by recursively applying the bucket sorting algorithm.  The sorted buckets are then combined to form the sorted collection.  Bucket sort's best case occurs when the data being sorted can be distributed between the buckets perfectly.  If the values are sparsely allocated over the possible value range, a larger bucket size is better since the buckets will likely be evenly distributed. Bucket sort performs at its worse when all the elements are allocated to the same bucket. Bucket sort is mainly useful when input is uniformly distributed over a range.
